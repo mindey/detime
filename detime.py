@@ -5,9 +5,6 @@ DECIMAL TIME
 
 About
 =====
-In childhood, I tried to simplify computation of time for myself, so I
-invented a decimal system for counting time.
-
 1 year = 10 months
 1 week = 10 days
 1 day = 10 hours
@@ -22,11 +19,14 @@ Years start at 1970 Jan 1.
 Usage
 =====
 
->>> from detime import Time
->>> Time(1970, 1, 1)
+$ python detime.py
+0048-01-05 00:96:92.19870...
+
+>>> from detime import Date
+>>> Date(1970, 1, 1)
 0000-01-01 00:00:0.00000
 
->>> Time(1977, 3, 5, 23, 55, 30)
+>>> Date(1977, 3, 5, 23, 55, 30)
 0007-02-28 09:96:87.50000
 
 """
@@ -34,6 +34,7 @@ Usage
 import copy
 import datetime
 import calendar
+
 
 class Constants:
     origin_date = datetime.datetime(1970, 1, 1, 0, 0)
@@ -43,7 +44,8 @@ class Constants:
 
 constant = Constants()
 
-class Time:
+
+class Date:
 
     def __init__(self, *args):
 
@@ -103,10 +105,21 @@ class Time:
 
     def get_day_seconds(self):
         midnight = self.date.replace(hour=0, minute=0, second=0, microsecond=0)
-        return (self.date - midnight).seconds
+        return (self.date - midnight).total_seconds()
 
     def __repr__(self):
         return '{:04d}-{:02d}-{:02d} {:02d}:{:02d}:{:02.5f}'.format(
             self.year, self.month, self.day,
             self.hour, self.minute, self.second
         )
+
+
+if __name__ == '__main__':
+    import time
+    while True:
+        tm = time.gmtime()
+        date = Date()
+        print("[{:04d}-{:02d}-{:02d} =] {} [= {:02d}:{:02d}:{:02d}]".format(
+            tm.tm_year, tm.tm_mon, tm.tm_mday, date, tm.tm_hour, tm.tm_min, tm.tm_sec
+        ), end='\r', flush=True)
+        del date
