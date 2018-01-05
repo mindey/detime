@@ -10,7 +10,7 @@
 >>> Time(1977, 3, 5, 23, 55, 30)
 0007-02-28 09:96:87.50000
 ```
-[Video](https://github.com/mindey/detime/blob/master/media/detime.mp4).
+[Video (1.8M) (MP4)](https://github.com/mindey/detime/blob/master/media/about.mp4?raw=true).
 
 ## About
 
