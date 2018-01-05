@@ -3,11 +3,11 @@
 ## Usage
 
 ```bash
->>> from detime import Time
->>> Time(1970, 1, 1)
+>>> from detime import Date
+>>> Date(1970, 1, 1)
 0000-01-01 00:00:0.00000
 
->>> Time(1977, 3, 5, 23, 55, 30)
+>>> Date(1977, 3, 5, 23, 55, 30)
 0007-02-28 09:96:87.50000
 ```
 [Demo (1.8M) (MP4)](https://github.com/mindey/detime/blob/master/media/about.mp4?raw=true).
