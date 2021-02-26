@@ -4,3 +4,6 @@
 # Compiled python modules.
 *__pycache__*
 *.pyc
+
+dist
+detime.egg-info/
