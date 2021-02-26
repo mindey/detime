@@ -10,7 +10,7 @@ Usage
 
     >>> from detime import detime
 
-    >>> dtime()
+    >>> detime()
     0051-02-21 00:62:18.46994
 
     >>> d = detime(1970, 1, 1)
