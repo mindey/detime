@@ -14,26 +14,19 @@ About
 => 1 second = 0.864 standard SI seconds.
 => 1 month = 3~4 weeks.
 
-Years start at 1970 Jan 1.
-
-Usage
-=====
-
-$ python detime.py
-0048-01-05 00:96:92.19870...
-
->>> from detime import Date
->>> Date(1970, 1, 1)
-0000-01-01 00:00:0.00000
-
->>> Date(1977, 3, 5, 23, 55, 30)
-0007-02-28 09:96:87.50000
-
+Years start at 1970 Jan 1, at UNIX time start date.
 """
 
 import copy
 import datetime
 import calendar
+import argparse
+import time
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-s', '--show', help='Persist showing counting time.')
+args = parser.parse_args()
+show = args.show
 
 
 class Constants:
@@ -114,12 +107,23 @@ class Date:
         )
 
 
-if __name__ == '__main__':
-    import time
-    while True:
+def counter(once=False):
+
+    if show == 'how':
+
+        while True:
+            tm = time.gmtime()
+            date = Date()
+            print("[{:04d}-{:02d}-{:02d} =] {} [= {:02d}:{:02d}:{:02d}]".format(
+                tm.tm_year, tm.tm_mon, tm.tm_mday, date, tm.tm_hour, tm.tm_min, tm.tm_sec
+            ), end='\r', flush=True)
+            del date
+
+    else:
         tm = time.gmtime()
         date = Date()
-        print("[{:04d}-{:02d}-{:02d} =] {} [= {:02d}:{:02d}:{:02d}]".format(
-            tm.tm_year, tm.tm_mon, tm.tm_mday, date, tm.tm_hour, tm.tm_min, tm.tm_sec
-        ), end='\r', flush=True)
-        del date
+        return date
+
+
+if __name__ == '__main__':
+    counter()
