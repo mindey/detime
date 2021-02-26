@@ -4,7 +4,7 @@ DECIMAL TIME
 Usage
 -----
 
-`pip install detime`
+``pip install detime``
 
 .. code:: bash
 
