@@ -5,7 +5,7 @@ with open('README.rst', 'r', encoding='utf-8') as f:
 
 setup(
     name='detime',
-    version='1.0.1',
+    version='1.0.2',
     description="Decimal Silicon Time: time since UNIX zero, in decimal.",
     long_description=long_description,
     long_description_content_type='text/rst',
@@ -22,7 +22,7 @@ setup(
     zip_safe=False,
     entry_points = {
         'console_scripts': [
-            'dtime=detime.main:counter',
+            'dtime=detime:counter',
         ],
     }
 )
