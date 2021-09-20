@@ -37,12 +37,31 @@ Usage
 About
 -----
 
-In childhood, I tried to simplify computation of time for myself, so I
-invented a decimal system for counting time.
+In childhood, I tried to simplify computation of time for myself, so I invented a decimal system for counting time.
 
-1 year = 10 months 1 week = 10 days 1 day = 10 hours 1 hour = 100
-minutes 1 minute = 100 seconds
+Later I discovered, that others did so as well. The relationships below follow the ratios, that I used in my original implementation.
 
-=> 1 second = 0.864 standard SI seconds. => 1 month = 3~4 weeks.
+Axioms
+======
 
-Years start at 1970 Jan 1, midnight.
+#. Relationships follow:
+    * 1 year = 10 months
+    * 1 week = 10 days
+    * 1 day = 10 hours
+    * 1 hour = 100 minutes
+    * 1 minute = 100 seconds
+
+#. Starting point follows:
+    * Years start at 1970 Jan 1, midnight.
+
+Corollaries
+===========
+
+#. => 1 second is:
+    * 0.864 standard SI seconds.
+#. => 1 month is:
+    * 36~37 days long, with 38 long last month on leap years.
+    * 3~4 weeks rolling by 10 days onto months.
+#. => 1 year is:
+    * 36.5 (or 36.6 on leap years) weeks.
+
