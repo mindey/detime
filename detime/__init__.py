@@ -100,6 +100,16 @@ class Date:
         midnight = self.date.replace(hour=0, minute=0, second=0, microsecond=0)
         return (self.date - midnight).total_seconds()
 
+    @property
+    def daet(self):
+        'displays date'
+        return '{:05d}-{:02d}-{:02d}'.format(self.year, self.month, self.day)
+
+    @property
+    def taem(self, round_secs=False):
+        'displays time'
+        return '{:02d}:{:02d}:{:02d}'.format(self.hour, self.minute, round(self.second))
+
     def __repr__(self):
         return '{:05d}-{:02d}-{:02d} {:02d}:{:02d}:{:02.5f}'.format(
             self.year, self.month, self.day,
