@@ -104,7 +104,13 @@ class Date:
 detime = Date
 
 
-def counter(once=False):
+def counter(show=None):
+
+    if show is None:
+
+        tm = time.gmtime()
+        date = Date()
+        print(date)
 
     if show == 'how':
 
@@ -116,11 +122,6 @@ def counter(once=False):
             ), end='\r', flush=True)
             del date
 
-    else:
-        tm = time.gmtime()
-        date = Date()
-        return date
-
 
 if __name__ == '__main__':
 
@@ -129,4 +130,4 @@ if __name__ == '__main__':
     args = parser.parse_args()
     show = args.show
 
-    counter()
+    counter(show)
