@@ -23,6 +23,8 @@ import calendar
 import argparse
 import time
 
+parser = argparse.ArgumentParser()
+parser.add_argument('-s', '--show', help='Persist showing counting time.')
 
 class Constants:
     origin_date = datetime.datetime(1970, 1, 1, 0, 0)
@@ -54,7 +56,9 @@ class Date:
         self.second = self.tseconds - (self.hour*10000. + self.minute*100)
 
     def get_current_date(self, *args):
-        if args:
+        if isinstance(args[0], datetime.datetime):
+            self.date = args[0]
+        elif args:
             self.date = datetime.datetime(*args)
         else:
             self.date = datetime.datetime.utcnow()
@@ -104,15 +108,10 @@ class Date:
 detime = Date
 
 
-def counter(show=None):
+def counter():
+    args = parser.parse_args()
 
-    if show is None:
-
-        tm = time.gmtime()
-        date = Date()
-        print(date)
-
-    if show == 'how':
+    if args.show == 'how':
 
         while True:
             tm = time.gmtime()
@@ -122,12 +121,11 @@ def counter(show=None):
             ), end='\r', flush=True)
             del date
 
+    else:
+        tm = time.gmtime()
+        date = Date()
+        print(date)
+
 
 if __name__ == '__main__':
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-s', '--show', help='Persist showing counting time.')
-    args = parser.parse_args()
-    show = args.show
-
-    counter(show)
+    counter()
