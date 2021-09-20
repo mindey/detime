@@ -8,7 +8,7 @@ setup(
     version='1.0.2',
     description="Decimal Silicon Time: time since UNIX zero, in decimal.",
     long_description=long_description,
-    long_description_content_type='text/rst',
+    long_description_content_type='text/x-rst',
     url='https://github.com/mindey/detime',
     author='Mindey',
     author_email='~@mindey.com',
