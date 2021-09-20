@@ -23,11 +23,6 @@ import calendar
 import argparse
 import time
 
-parser = argparse.ArgumentParser()
-parser.add_argument('-s', '--show', help='Persist showing counting time.')
-args = parser.parse_args()
-show = args.show
-
 
 class Constants:
     origin_date = datetime.datetime(1970, 1, 1, 0, 0)
@@ -108,6 +103,7 @@ class Date:
 
 detime = Date
 
+
 def counter(once=False):
 
     if show == 'how':
@@ -115,7 +111,7 @@ def counter(once=False):
         while True:
             tm = time.gmtime()
             date = Date()
-            print("[{:04d}-{:02d}-{:02d} =] {} [= {:02d}:{:02d}:{:02d}]".format(
+            print("[{:05d}-{:02d}-{:02d} =] {} [= {:02d}:{:02d}:{:02d}]".format(
                 tm.tm_year, tm.tm_mon, tm.tm_mday, date, tm.tm_hour, tm.tm_min, tm.tm_sec
             ), end='\r', flush=True)
             del date
@@ -127,4 +123,10 @@ def counter(once=False):
 
 
 if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-s', '--show', help='Persist showing counting time.')
+    args = parser.parse_args()
+    show = args.show
+
     counter()
