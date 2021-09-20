@@ -56,10 +56,11 @@ class Date:
         self.second = self.tseconds - (self.hour*10000. + self.minute*100)
 
     def get_current_date(self, *args):
-        if isinstance(args[0], datetime.datetime):
-            self.date = args[0]
-        elif args:
-            self.date = datetime.datetime(*args)
+        if args:
+            if isinstance(args[0], datetime.datetime):
+                self.date = args[0]
+            else:
+                self.date = datetime.datetime(*args)
         else:
             self.date = datetime.datetime.utcnow()
         return self.date
