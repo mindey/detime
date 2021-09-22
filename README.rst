@@ -19,8 +19,15 @@ Usage
     >>> d = detime(1970, 1, 1)
     00000-01-01 00:00:0.00000
 
+    # Conversion detime -> datetime
     >>> d.date
     datetime.datetime(1970, 1, 1, 0, 0)
+
+    # Conversion datetime -> detime
+    >>> import datetime
+    >>> t = datetime.fromisoformat('1969-12-31T05:07:11.131719')
+    >>> detime(t)
+    -0001-10-37 02:13:32.32838
 
     >>> detime(2000, 1, 1).get_month_lengths()
     [36, 37, 36, 37, 36, 37, 36, 37, 36, 38]
