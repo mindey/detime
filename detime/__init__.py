@@ -22,6 +22,7 @@ import datetime
 import calendar
 import argparse
 import time
+import math
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-s', '--show', help='Persist showing counting time.')
@@ -54,6 +55,9 @@ class Date:
         self.hour = int(self.tseconds/10000.)
         self.minute = int((self.tseconds - self.hour*10000.) / 100.)
         self.second = self.tseconds - (self.hour*10000. + self.minute*100)
+
+        # Unix dseconds
+        self.seconds = time.mktime(self.date.timetuple()) / constant.second_length
 
     def get_current_date(self, *args):
         if args:
@@ -99,6 +103,12 @@ class Date:
     def get_day_seconds(self):
         midnight = self.date.replace(hour=0, minute=0, second=0, microsecond=0)
         return (self.date - midnight).total_seconds()
+
+
+    @property
+    def weekday(self):
+        # We assume that 00000-01-01 was "1st" day of week, denoted as "0"
+        return math.floor(self.seconds / 100000.) % 10
 
     @property
     def daet(self):

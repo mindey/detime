@@ -63,6 +63,7 @@ Axioms
 
 #. Starting point follows:
     * Years start at 1970 Jan 1, midnight.
+    * The 1970 Jan 1 is first weekday, denoted by "0"
 
 Corollaries
 ===========
@@ -74,4 +75,3 @@ Corollaries
     * 3~4 weeks rolling by 10 days onto months.
 #. => 1 year is:
     * 36.5 (or 36.6 on leap years) weeks.
-
