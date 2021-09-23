@@ -21,17 +21,23 @@ Usage
     >>> d = detime(50, 8, 11, 4, 47, 36.10234)
     >>> d.date
     datetime.datetime(2020, 9, 22, 10, 44, 11, 992422)
+    >>> d.weekday
+    7
 
     >>> d = detime(0, 0, 0)
     00000-01-01 00:00:0.00000
 
     >>> d.date
     datetime.datetime(1970, 1, 1, 0, 0)
+    >>> d.weekday
+    0
 
     # Negative dates, leap years:
     >>> t = datetime.fromisoformat('1968-12-31T05:07:11.131719')
     >>> d = detime(t); d
     -0002-10-38 02:13:32.32838
+    >>> d.weekday
+    4
 
     # Leap years 10th month is 38-days long:
     >>> d.month_lengths
