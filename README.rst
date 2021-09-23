@@ -11,29 +11,34 @@ Usage
 
 .. code:: bash
 
+    >>> from datetime import datetime
     >>> from detime import detime
 
-    >>> detime()
-    00051-02-21 00:62:18.46994
+    >>> date = datetime(2020, 9, 22, 10, 44, 11, 992422)
+    >>> detime(date)
+    00050-08-11 04:47:36.10234
 
-    >>> d = detime(1970, 1, 1)
+    >>> d = detime(50, 8, 11, 4, 47, 36.10234)
+    >>> d.date
+    datetime.datetime(2020, 9, 22, 10, 44, 11, 992422)
+
+    >>> d = detime(0, 0, 0)
     00000-01-01 00:00:0.00000
 
-    # Conversion detime -> datetime
     >>> d.date
     datetime.datetime(1970, 1, 1, 0, 0)
 
-    # Conversion datetime -> detime
-    >>> import datetime
-    >>> t = datetime.fromisoformat('1969-12-31T05:07:11.131719')
-    >>> detime(t)
-    -0001-10-37 02:13:32.32838
+    # Negative dates, leap years:
+    >>> t = datetime.fromisoformat('1968-12-31T05:07:11.131719')
+    >>> d = detime(t); d
+    -0002-10-38 02:13:32.32838
 
-    >>> detime(2000, 1, 1).get_month_lengths()
+    # Leap years 10th month is 38-days long:
+    >>> d.month_lengths
     [36, 37, 36, 37, 36, 37, 36, 37, 36, 38]
 
     $ dtime
-    00051-02-21 00:33:19.38145
+    00051-08-11 [3] @04:74:42 # Meaning: it was a [3]rd day of the week.
 
     $ dtime -show
     [2021-02-26 =] 00051-02-21 00:33:19.38145 [= 00:47:47]

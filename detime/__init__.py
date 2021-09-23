@@ -41,13 +41,32 @@ class Date:
     def __init__(self, *args):
 
         self.origin = constant.origin_date
-        self.get_current_date(*args)
-        self.compute_date()
+
+        if args:
+            if isinstance(args[0], datetime.datetime):
+                self.date = args[0]
+                self.compute_date()
+            else:
+                self.interpret_date(*args)
+        else:
+            self.date = datetime.datetime.utcnow()
+            self.compute_date()
 
     def compute_date(self):
+        """
+            Takes:
+            (self.date - the Gregorian date)
+
+            Sets:
+            (self.year, self.month, self.day, self.hour, self.minute, self.second,
+
+            self.yday - day of the year
+            self.tseconds - decimal seconds today,
+            self.seconds - decimal unix seconds)
+        """
         self.year = (self.date.year - self.origin.year)
         self.yday = self.date.timetuple().tm_yday
-        self.month = self.get_month()
+        self.month = self.set_month()
         self.day = self.yday - sum(self.month_lengths[:self.month][:-1]) \
             or self.month_lengths[self.month]
 
@@ -59,21 +78,63 @@ class Date:
         # Unix dseconds
         self.seconds = time.mktime(self.date.timetuple()) / constant.second_length
 
-    def get_current_date(self, *args):
-        if args:
-            if isinstance(args[0], datetime.datetime):
-                self.date = args[0]
-            else:
-                self.date = datetime.datetime(*args)
+    def interpret_date(self, year, month=1, day=1, hour=0, minute=0, second=0.):
+        """
+            Takes:
+            (self.year, self.month, self.day, self.hour, self.minute, self.second)
+
+            Sets:
+            (self.date, self.seconds - unix decimal seconds)
+
+        """
+        year = int(year)
+        years = abs(year)
+        months = min(10, max(0, int(month - 1)))
+        days = min(38, max(0, int(day - 1)))
+        hours = min(10, max(0, int(hour)))
+        minutes = min(100, max(0, int(minute)))
+        seconds = min(100., max(0., second))
+
+        if seconds == float(100):
+            seconds = 0.
+            minutes += 1
+
+        # Starting total decimal seconds computation
+        self.seconds = 0.
+
+        leaps = max(0, (abs(year)+1) // 4)
+        full_year_days = (years*365 + leaps)
+
+        self.month_lengths = constant.month_lengths
+        if (year + 2) % 4 == 0:
+            self.month_lengths[-1] += 1
         else:
-            self.date = datetime.datetime.utcnow()
-        return self.date
+            days = min(37, days)
+
+        self.yday = sum(self.month_lengths[:months] + [days])
+        self.tseconds = hours * 10000 + minutes * 100 + seconds
+
+        self.seconds += (full_year_days + self.yday) * 100000 + self.tseconds
+
+        if year < 0:
+            self.seconds = -self.seconds
+
+        self.date = datetime.datetime.utcfromtimestamp(self.seconds * constant.second_length)
+
+        # set attributes (or could call self.compute_date() now, cause having self.date)
+        self.year = year
+        self.month = months + 1
+        self.day = days + 1
+        self.hour = hours
+        self.minute = minutes
+        self.second = seconds
+
 
     def get_time_delta(self):
         self.delta = self.date - self.origin
 
-    def get_month(self):
-        for i, month_length in enumerate(self.get_month_lengths()):
+    def set_month(self):
+        for i, month_length in enumerate(self.set_month_lengths()):
             if sum(self.month_lengths[:i+1]) >= self.yday:
                 break
         return i+1
@@ -86,11 +147,11 @@ class Date:
         self.year_length = year_length
         return self.year_length
 
-    def get_month_lengths(self):
+    def set_month_lengths(self):
 
         if calendar.isleap(self.date.year):
             self.month_lengths = copy.copy(constant.month_lengths)
-            self.month_lengths[-1] += 1
+            self.month_lengths[-1] = 38 # leap year last month length
             return self.month_lengths
         else:
             self.month_lengths = copy.copy(constant.month_lengths)
@@ -144,8 +205,8 @@ def counter():
 
     else:
         tm = time.gmtime()
-        date = Date()
-        print(date)
+        t = Date()
+        print(f'{t.daet} [{t.weekday}] @{t.taem}')
 
 
 if __name__ == '__main__':
