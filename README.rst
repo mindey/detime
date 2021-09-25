@@ -13,9 +13,11 @@ Usage
 
     >>> from datetime import datetime
     >>> from detime import detime
+    
+    >>> detime() # gets current time
+    00050-01-11 08:43:86.98217
 
-    >>> date = datetime(2020, 9, 22, 10, 44, 11, 992422)
-    >>> detime(date)
+    >>> detime(datetime(2020, 9, 22, 10, 44, 11, 992422))
     00050-08-11 04:47:36.10234
 
     >>> d = detime(50, 8, 11, 4, 47, 36.10234)
