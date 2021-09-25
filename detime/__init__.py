@@ -165,11 +165,20 @@ class Date:
         midnight = self.date.replace(hour=0, minute=0, second=0, microsecond=0)
         return (self.date - midnight).total_seconds()
 
-
     @property
     def weekday(self):
         # We assume that 00000-01-01 was "1st" day of week, denoted as "0"
         return math.floor(self.seconds / 100000.) % 10
+
+    @property
+    def week(self):
+        days = (self.yday - self.weekday)
+        if days <= 0:
+            weeks = 1
+        else:
+            weeks = int(math.ceil(days / 10.)) + 1
+
+        return weeks
 
     @property
     def daet(self):
