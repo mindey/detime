@@ -45,7 +45,7 @@ Usage
 
     # Leap years 10th month is 38-days long:
     >>> t.month_lengths
-    t.month_lengths
+    [36, 37, 36, 37, 36, 37, 36, 37, 36, 38]
 
     >>> exit()
 
