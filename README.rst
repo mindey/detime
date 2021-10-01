@@ -25,15 +25,17 @@ Usage
 
     >>> from datetime import datetime
     >>> detime(datetime(2020, 9, 22, 10, 44, 11, 992422))
-    # 00050-08-11 04:47:36.10234
+    # 00050-08-11T04:47:36.10234027777915
 
-    >>> d = detime(0, 0, 0)
-    # 00000-01-01 00:00:0.00000
+    >>> d = detime(0, 0, 0); d
+    # detime.detime(0, 1, 1, 0, 0, 0.0)
 
     >>> d.date
     # datetime.datetime(1970, 1, 1, 0, 0)
     >>> d.weekday
     # 0
+    >>> d.week
+    # 1
 
     >>> t = detime(datetime.fromisoformat('1968-12-31T05:07:11.131719'))
     >>> t.isoformat()
