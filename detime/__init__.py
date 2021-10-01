@@ -184,32 +184,30 @@ class Date:
 
         return weeks
 
-    @property
-    def daet(self):
-        'displays date'
-        return '{:05d}-{:02d}-{:02d}'.format(self.year, self.month, self.day)
-
-    @property
-    def taem(self, round_secs=False):
-        'displays time'
-        return '{:02d}:{:02d}:{:02d}'.format(self.hour, self.minute, round(self.second))
-
     def isoformat(self, round_secs=False):
         return '{:05d}-{:02d}-{:02d}T{:02d}:{:02d}:{}'.format(
             self.year, self.month, self.day,
             self.hour, self.minute, self.second
         )
 
-    def izoformat(self, round_secs=False):
-        secs = round(self.second) if round_secs else self.second
+    @property
+    def daet(self):
+        'date'
+        return '{:05d}-{:02d}-{:02d}'.format(self.year, self.month, self.day)
 
-        if round_secs: template = '{:05d}-{:02d}-{:02d} {:02d}:{:02d}:{:02d}'
-        else: template = '{:05d}-{:02d}-{:02d} {:02d}:{:02d}:{:02.5f}'
+    @property
+    def taem(self, round_secs=False):
+        'time'
+        secs = math.floor(self.second) if round_secs else self.second
 
-        return template.format(
-            self.year, self.month, self.day,
-            self.hour, self.minute, secs
-        )
+        if round_secs: template = '{:02d}:{:02d}:{:02d}'
+        else: template = '{:02d}:{:02d}:{}'
+
+        return template.format(self.hour, self.minute, math.floor(self.second))
+
+    @property
+    def show(self):
+        return f'{self.daet} {self.taem}'
 
     def __repr__(self):
         return f'detime.detime({self.year}, {self.month}, {self.day}, {self.hour}, {self.minute}, {self.second})'
@@ -226,7 +224,7 @@ def counter():
             tm = time.gmtime()
             date = Date()
             print("[{:05d}-{:02d}-{:02d} =] {} [= {:02d}:{:02d}:{:02d}]".format(
-                tm.tm_year, tm.tm_mon, tm.tm_mday, date.izoformat(True), tm.tm_hour, tm.tm_min, tm.tm_sec
+                tm.tm_year, tm.tm_mon, tm.tm_mday, date.show, tm.tm_hour, tm.tm_min, tm.tm_sec
             ), end='\r', flush=True)
             del date
 

@@ -57,16 +57,12 @@ Usage
 
     (ctrl+c to stop)
 
-
-`Demo (1.8M)
-(MP4) <https://github.com/mindey/detime/blob/master/media/about.mp4?raw=true>`__.
-
 About
 -----
 
 In childhood, I tried to simplify computation of time for myself, so I invented a decimal system for counting time.
 
-Later I discovered, that others did so as well. The relationships below follow the ratios, that I used in my original implementation.
+Later I discovered, that others did so as well. The relationships of this implementation below follow the axioms.
 
 Axioms
 ======
@@ -81,6 +77,9 @@ Axioms
 #. Starting point follows:
     * Years start at 1970 Jan 1, midnight.
     * The 1970 Jan 1 is first weekday, denoted by "0"
+    * Numbers of months and days of month start with "1"
+    * Months have round number of days.
+    * Use leap years.
 
 Corollaries
 ===========
@@ -92,3 +91,8 @@ Corollaries
     * 3~4 weeks rolling by 10 days onto months.
 #. => 1 year is:
     * 36.5 (or 36.6 on leap years) weeks.
+
+
+NOTE: It would be nice to have decimal expression of years indicate exactly month numbers.
+
+However, the choice to use leap years and round numbers of days in months make that impossible.
