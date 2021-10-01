@@ -52,6 +52,10 @@ class Date:
             self.date = datetime.datetime.utcnow()
             self.compute_date()
 
+    @classmethod
+    def utcnow(cls):
+        return Date()
+
     def compute_date(self):
         """
             Takes:
@@ -107,7 +111,7 @@ class Date:
 
         self.month_lengths = constant.month_lengths
         if (year + 2) % 4 == 0:
-            self.month_lengths[-1] += 1
+            self.month_lengths[-1] = 38
         else:
             days = min(37, days)
 
@@ -190,11 +194,25 @@ class Date:
         'displays time'
         return '{:02d}:{:02d}:{:02d}'.format(self.hour, self.minute, round(self.second))
 
-    def __repr__(self):
-        return '{:05d}-{:02d}-{:02d} {:02d}:{:02d}:{:02.5f}'.format(
+    def isoformat(self, round_secs=False):
+        return '{:05d}-{:02d}-{:02d}T{:02d}:{:02d}:{}'.format(
             self.year, self.month, self.day,
             self.hour, self.minute, self.second
         )
+
+    def izoformat(self, round_secs=False):
+        secs = round(self.second) if round_secs else self.second
+
+        if round_secs: template = '{:05d}-{:02d}-{:02d} {:02d}:{:02d}:{:02d}'
+        else: template = '{:05d}-{:02d}-{:02d} {:02d}:{:02d}:{:02.5f}'
+
+        return template.format(
+            self.year, self.month, self.day,
+            self.hour, self.minute, secs
+        )
+
+    def __repr__(self):
+        return f'detime.detime({self.year}, {self.month}, {self.day}, {self.hour}, {self.minute}, {self.second})'
 
 detime = Date
 
@@ -208,7 +226,7 @@ def counter():
             tm = time.gmtime()
             date = Date()
             print("[{:05d}-{:02d}-{:02d} =] {} [= {:02d}:{:02d}:{:02d}]".format(
-                tm.tm_year, tm.tm_mon, tm.tm_mday, date, tm.tm_hour, tm.tm_min, tm.tm_sec
+                tm.tm_year, tm.tm_mon, tm.tm_mday, date.izoformat(True), tm.tm_hour, tm.tm_min, tm.tm_sec
             ), end='\r', flush=True)
             del date
 

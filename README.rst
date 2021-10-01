@@ -11,20 +11,21 @@ Usage
 
 .. code:: bash
 
-    >>> from datetime import datetime
     >>> from detime import detime
-    
-    >>> detime() # gets current time
-    00050-01-11 08:43:86.98217
 
+    >>> detime.utcnow()
+    detime.detime(50, 1, 11, 8, 43, 86.98217)
+
+    >>> d = detime(50, 1, 11, 8, 43, 86.98217)
+    >>> d.date
+    datetime.datetime(2020, 1, 11, 20, 15, 10, 352595)
+
+    >>> d.isoformat()
+    00050-01-11T08:43:86.98217
+
+    >>> from datetime import datetime
     >>> detime(datetime(2020, 9, 22, 10, 44, 11, 992422))
     00050-08-11 04:47:36.10234
-
-    >>> d = detime(50, 8, 11, 4, 47, 36.10234)
-    >>> d.date
-    datetime.datetime(2020, 9, 22, 10, 44, 11, 992422)
-    >>> d.weekday
-    7
 
     >>> d = detime(0, 0, 0)
     00000-01-01 00:00:0.00000
@@ -34,22 +35,25 @@ Usage
     >>> d.weekday
     0
 
-    # Negative dates, leap years:
-    >>> t = datetime.fromisoformat('1968-12-31T05:07:11.131719')
-    >>> d = detime(t); d
-    -0002-10-38 02:13:32.32838
-    >>> d.weekday
+    >>> t = detime(datetime.fromisoformat('1968-12-31T05:07:11.131719'))
+    >>> t.isoformat()
+    '-0002-10-38T02:13:32.32837847222254'
+    >>> t.weekday
     4
+    >>> t.week
+    38
 
     # Leap years 10th month is 38-days long:
-    >>> d.month_lengths
-    [36, 37, 36, 37, 36, 37, 36, 37, 36, 38]
+    >>> t.month_lengths
+    t.month_lengths
+
+    >>> exit()
 
     $ dtime
-    00051-08-11 [3] @04:74:42 # Meaning: it was a [3]rd day of the week.
+    00051-01-01 [8] @04:74:42
 
     $ dtime -show
-    [2021-02-26 =] 00051-02-21 00:33:19.38145 [= 00:47:47]
+    [2021-02-26 =] 00051-02-21 00:33:19 [= 00:47:47]
 
     (ctrl+c to stop)
 
