@@ -62,7 +62,7 @@ About
 
 In childhood, I tried to simplify computation of time for myself, so I invented a decimal system for counting time.
 
-Later I discovered, that others did so as well. The relationships of this implementation below follow the axioms.
+Later I discovered, that others did so as well. The relationships of this implementation follow the below axioms.
 
 Axioms
 ======
