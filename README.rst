@@ -13,7 +13,7 @@ Usage
 
     >>> from detime import detime
 
-    >>> detime.utcnow()
+    >>> detime.utcnow() # = detime()
     detime.detime(50, 1, 11, 8, 43, 86.98217)
 
     >>> d = detime(50, 1, 11, 8, 43, 86.98217)
