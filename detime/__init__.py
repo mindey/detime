@@ -227,7 +227,7 @@ def counter():
 
         while True:
             tm = time.gmtime()
-            date = Date()
+            date = detime.utcnow()
             print("[{:05d}-{:02d}-{:02d} =] {} [= {:02d}:{:02d}:{:02d}]".format(
                 tm.tm_year, tm.tm_mon, tm.tm_mday, date.show, tm.tm_hour, tm.tm_min, tm.tm_sec
             ), end='\r', flush=True)
@@ -235,7 +235,7 @@ def counter():
 
     else:
         tm = time.gmtime()
-        t = Date()
+        t = detime.utcnow()
         print(f'{t.daet} [{t.weekday}] @{t.taem}')
 
 
