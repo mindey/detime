@@ -56,6 +56,11 @@ class Date:
     def utcnow(cls):
         return Date()
 
+    @classmethod
+    def datetime(cls, *args):
+        date = datetime.datetime(*args)
+        return Date(date)
+
     def compute_date(self):
         """
             Takes:
