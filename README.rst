@@ -13,8 +13,11 @@ Usage
 
     >>> from detime import detime
 
-    >>> detime.utcnow() # = detime()
-    # detime.detime(50, 1, 11, 8, 43, 86.98217)
+    >>> detime() # current date and time, alias: detime.utcnow()
+    # detime.detime(50, 1, 10, 5, 82, 29.538934027783398)
+
+    >>> d = detime.datetime(2020, 1, 11, 20, 15, 10, 352595)
+    # detime.detime(50, 1, 11, 8, 43, 86.98217013890098)
 
     >>> d = detime(50, 1, 11, 8, 43, 86.98217)
     >>> d.date
