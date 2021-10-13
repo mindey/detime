@@ -5,7 +5,7 @@ with open('README.rst', 'r', encoding='utf-8') as f:
 
 setup(
     name='detime',
-    version='1.1.3',
+    version='1.1.4',
     description="Decimal Silicon Time: time since UNIX zero, in decimal.",
     long_description=long_description,
     long_description_content_type='text/x-rst',

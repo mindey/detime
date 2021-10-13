@@ -49,12 +49,12 @@ class Date:
             else:
                 self.interpret_date(*args)
         else:
-            self.date = datetime.datetime.utcnow()
-            self.compute_date()
+            self.interpret_date(0, 0, 0)
 
     @classmethod
     def utcnow(cls):
-        return Date()
+        date = datetime.datetime.utcnow()
+        return Date(date)
 
     @classmethod
     def datetime(cls, *args):
