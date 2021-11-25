@@ -190,7 +190,7 @@ class Date:
         return weeks
 
     def isoformat(self, round_secs=False):
-        return '{:05d}-{:02d}-{:02d}T{:02d}:{:02d}:{}'.format(
+        return '{:04d}-{:02d}-{:02d}T{:02d}:{:02d}:{}'.format(
             self.year, self.month, self.day,
             self.hour, self.minute, self.second
         )
@@ -198,17 +198,40 @@ class Date:
     @property
     def daet(self):
         'date'
-        return '{:05d}-{:02d}-{:02d}'.format(self.year, self.month, self.day)
+        return '{:04d}-{:02d}-{:02d}'.format(self.year, self.month, self.day)
 
     @property
-    def taem(self, round_secs=False):
+    def daey(self):
+        'absolute week-time since 1970-01-01 00:00:00'
+        diff = (self.date - constant.origin_date)
+
+        if diff.days < 0:
+            fraction = -(86400-diff.seconds)/86400.
+        else:
+            fraction = diff.seconds/86400.
+
+        return (diff.days + diff.seconds/86400.)
+
+    @property
+    def saec(self):
+        'decimal second of the day'
+        return self.hour*10000 + self.minute*100 + self.second
+
+    @property
+    def waek(self):
+        return self.daey / 10.
+
+    @property
+    def taem(self, round_secs=True):
         'time'
-        secs = math.floor(self.second) if round_secs else self.second
+        secs = math.floor(self.second)
+        mils = str(self.second - secs).split('.', 1)[-1]
 
-        if round_secs: template = '{:02d}:{:02d}:{:02d}'
-        else: template = '{:02d}:{:02d}:{}'
+        if round_secs:
+            return '{:02d}:{:02d}:{:02d}'.format(self.hour, self.minute, secs)
 
-        return template.format(self.hour, self.minute, math.floor(self.second))
+        else:
+            return '{:02d}:{:02d}:{:02d}.{}'.format(self.hour, self.minute, secs, mils)
 
     @property
     def show(self):
@@ -228,10 +251,11 @@ def counter():
         while True:
             tm = time.gmtime()
             date = detime.utcnow()
-            print("[{:05d}-{:02d}-{:02d} =] {} [= {:02d}:{:02d}:{:02d}]".format(
+            print("[{:04d}-{:02d}-{:02d} =] {} [= {:02d}:{:02d}:{:02d}]".format(
                 tm.tm_year, tm.tm_mon, tm.tm_mday, date.show, tm.tm_hour, tm.tm_min, tm.tm_sec
             ), end='\r', flush=True)
             del date
+            time.sleep(0.1)
 
     else:
         tm = time.gmtime()
