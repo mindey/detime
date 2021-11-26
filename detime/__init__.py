@@ -57,6 +57,16 @@ class Date:
         return Date(date)
 
     @classmethod
+    def from_day(cls, day):
+        """
+            Takes: offset from constant.origin in days (fractional)
+            Returns: Date object
+        """
+        delta = datetime.timedelta(days=day)
+        date = constant.origin_date + delta
+        return Date(date)
+
+    @classmethod
     def datetime(cls, *args):
         date = datetime.datetime(*args)
         return Date(date)
