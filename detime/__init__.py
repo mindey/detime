@@ -213,14 +213,9 @@ class Date:
     @property
     def daey(self):
         'absolute week-time since 1970-01-01 00:00:00'
-        diff = (self.date - constant.origin_date)
+        diff = (self.date - constant.origin_date).total_seconds()
 
-        if diff.days < 0:
-            fraction = -(86400-diff.seconds)/86400.
-        else:
-            fraction = diff.seconds/86400.
-
-        return (diff.days + diff.seconds/86400.)
+        return diff/86400.
 
     @property
     def saec(self):
