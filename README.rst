@@ -1,8 +1,10 @@
-DECIMAL SILICON TIME
-====================
+DECIMAL TIME
+============
 A combination of `decimal time <https://en.wikipedia.org/wiki/Decimal_time>`__ and `unix time <https://en.wikipedia.org/wiki/Unix_time>`__, approximating the beginning of the process of `carbon life <https://en.wikipedia.org/wiki/Carbon-based_life>`__ giving birth to `silicon life <https://en.wikipedia.org/wiki/In_silico>`__.
 
 Dates starting at `00000-01-01 00:00:00 <https://en.wikipedia.org/wiki/Unix_time>`__ `Z <https://www.worldtimeserver.com/time-zones/z/>`__, which coincides with 1970-01-01 00:00:00 UTC of `Gregorian calendar <https://en.wikipedia.org/wiki/Gregorian_calendar>`__.
+
+Note: you may also be interested in looking at the EXTENDED DECIMAL TIME (see: `edtime <https://github.com/mindey/edtime>`__), that does not try to squeeze 10 months  into Earth year length, having a year of 1000 days, which resolves the problem mentioned at the bottom of this page, making the decimal representation of days since POSIX zero, - the date itself.
 
 Usage
 -----
